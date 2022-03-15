@@ -1,15 +1,15 @@
 ### 项目简介
 
-> 基于 Vue2.0 + Element-UI 开发的后台管理系统。项目内主要为表格查询功能。
+> 基于 Vue2.0 + Element-UI 开发的后台管理系统。[线上地址]('')
 
 ### 基本操作
 
 ```bash
 # 克隆
-git clone https://github.com/Snail-Lu/background-management-system.git
+git clone https://github.com/Snail-Lu/vue-management-system.git
 
 # 进入项目根目录
-cd background-management-system
+cd vue-management-system
 
 # 安装依赖
 npm install
