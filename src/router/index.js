@@ -22,15 +22,30 @@ export const constantRoutes = [
 	{
 		path: '/',
 		component: Layout,
-		redirect: '/main',
+		redirect: '/home',
 		children: [
 			{
-				path: 'main',
-				name: 'main',
-				component: () => import('@/views/common/main.vue'),
+				path: 'home',
+				name: 'home',
+				component: () => import('@/views/common/home.vue'),
 				meta: {
 					title: '首页',
 					icon: 'el-icon-s-home'
+				}
+			}
+		]
+	},
+	{
+		path: '/charts',
+		component: Layout,
+		children: [
+			{
+				path: '',
+				name: 'charts',
+				component: () => import('@/views/charts/index.vue'),
+				meta: {
+					title: '报表图表',
+					icon: 'el-icon-s-data'
 				}
 			}
 		]
