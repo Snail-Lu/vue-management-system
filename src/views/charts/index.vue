@@ -25,7 +25,7 @@
 	</div>
 </template>
 <script>
-import BarChart from './components/BarChart.vue'
+import BarChart from './components/BarChart'
 import LineChart from './components/LineChart.vue'
 import PieChart from './components/PieChart.vue'
 import RadarChart from './components/RadarChart.vue'
