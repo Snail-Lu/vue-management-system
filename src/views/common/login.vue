@@ -82,8 +82,8 @@ export default {
 		}
 		return {
 			loginForm: {
-				username: 'snaillu',
-				password: '12345678'
+				username: 'admin',
+				password: '123456'
 			},
 			loginRules: {
 				username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -121,11 +121,11 @@ export default {
 					localStorage.setItem('hasLogin', true)
 					var userInfo = {
 						id: '1',
-						psncode: '35034341',
-						username: 'snaillu'
+						psncode: '123',
+						username: 'admin'
 					}
 					localStorage.setItem('userInfo', JSON.stringify(userInfo))
-					this.$router.push({ path: '/main' })
+					this.$router.push({ path: '/home' })
 				} else {
 					console.log('验证失败')
 				}
