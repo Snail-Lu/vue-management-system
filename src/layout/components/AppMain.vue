@@ -23,10 +23,11 @@ export default {
 	height: calc(100vh - 120px);
 	width: 100%;
 	position: relative;
-	overflow: hidden;
+	overflow-x: hidden;
 	background-color: #f0f0f0;
 	padding: 25px;
 	box-sizing: border-box;
+	overflow-y: auto;
 }
 .root {
 	/* margin: 25px; */
