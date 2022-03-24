@@ -64,6 +64,16 @@ export const constantRoutes = [
 					icon: 'el-icon-menu',
 					title: '表单表格'
 				}
+			},
+			{
+				path: 'add',
+				name: 'addForm',
+				component: () => import('@/views/table/add'),
+				meta: {
+					icon: 'el-icon-menu',
+					title: '新增表单'
+				},
+				hidden: true
 			}
 		]
 	},

@@ -1,15 +1,15 @@
 <template>
 	<div class="root">
-		<el-form :inline="true" :model="formInline">
+		<el-form :inline="true" :model="searchForm">
 			<el-form-item label="商品编码">
-				<el-input v-model="formInline.goodsCode" clearable size="small"></el-input>
+				<el-input v-model="searchForm.goodsCode" clearable size="small"></el-input>
 			</el-form-item>
 			<el-form-item label="商品名称">
-				<el-input v-model="formInline.goodsName" clearable size="small"></el-input>
+				<el-input v-model="searchForm.goodsName" clearable size="small"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="queryData" type="primary" size="mini" icon="el-icon-search">查询</el-button>
-				<el-button @click="goExport" type="primary" size="mini" icon="el-icon-plus">新增</el-button>
+				<el-button @click="onSearch" type="primary" size="mini" icon="el-icon-search">查询</el-button>
+				<el-button @click="onAdd" type="primary" size="mini" icon="el-icon-plus">新增</el-button>
 			</el-form-item>
 		</el-form>
 		<el-table
@@ -55,8 +55,8 @@
 			layout="total,prev,sizes,pager, next"
 			:total="total"
 			@size-change="handleSizeChange"
-			:pageSize="formInline.pageInfo.pageSize"
-			:currentPage="formInline.pageInfo.pageNum"
+			:pageSize="searchForm.pageInfo.pageSize"
+			:currentPage="searchForm.pageInfo.pageNum"
 			@current-change="page"
 		>
 		</el-pagination>
@@ -67,7 +67,7 @@
 export default {
 	data() {
 		return {
-			formInline: {
+			searchForm: {
 				goodsCode: '',
 				goodsName: '',
 				pageInfo: {
@@ -84,48 +84,37 @@ export default {
 	},
 	methods: {
 		page(currentPage) {
-			this.formInline.pageInfo.pageNum = currentPage
-			this.goSearch()
+			this.searchForm.pageInfo.pageNum = currentPage
+			this.getData()
 		},
 		handleSizeChange(currentPage) {
-			this.formInline.pageInfo.pageSize = currentPage
-			this.goSearch()
+			this.searchForm.pageInfo.pageSize = currentPage
+			this.getData()
 		},
-		queryData() {
-			this.formInline.pageInfo.pageNum = 1
-			this.goSearch()
+		onSearch() {
+			this.searchForm.pageInfo.pageNum = 1
+			this.getData()
 		},
-		goSearch() {
-			const that = this
+		getData() {
+			const { searchForm: data } = this
 			this.tableLoading = true
 			this.req({
-				url: `life/portal/sku`,
-				data: {
-					partnerId: this.formInline.partnerId,
-					skuId: this.formInline.skuId,
-					itemType: this.formInline.itemType,
-					iId: this.formInline.iId,
-					name: this.formInline.name,
-					shortName: this.formInline.shortName,
-					// propertiesName: this.formInline.propertiesName,
-					pageInfo: {
-						pageNum: this.formInline.pageInfo.pageNum,
-						pageSize: this.formInline.pageInfo.pageSize
-					}
-				},
+				url: `/list`,
+				data,
 				method: 'POST'
 			}).then(
 				res => {
-					console.log('res :', res)
-					that.tableData = res.result.partnerSkuQueryListDtoList
-					that.total = res.result.total
+					this.tableData = res.result.list
+					this.total = res.result.total
 					this.tableLoading = false
 				},
 				err => {
-					console.log('err :', err)
 					this.tableLoading = false
 				}
 			)
+		},
+		onAdd() {
+			this.$router.push({ path: '/table/add' })
 		}
 	}
 }
