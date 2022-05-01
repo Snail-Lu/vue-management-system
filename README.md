@@ -1,6 +1,6 @@
 ### 项目简介
 
-> 基于 Vue2.0 + Element-UI 开发的后台管理系统。[线上地址]('')
+> 基于 Vue2.0 + Element-UI 开发的后台管理系统。[线上地址]('https://snail-lu.github.io/vue-management-system')
 
 ### 基本操作
 
