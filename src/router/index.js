@@ -88,7 +88,7 @@ export const constantRoutes = [
 const createRouter = () =>
 	new Router({
 		mode: 'hash',
-		base: '/vue-management-stystem',
+		base: '/vue-management-system',
 		scrollBehavior: () => ({
 			y: 0
 		}),
