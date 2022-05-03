@@ -28,10 +28,10 @@ module.exports = {
 		proxy: {
 			// 代理所有以‘/api’开头的网络请求
 			'/api': {
-				target: `http://192.168.40.7:8182/`,
+				target: `http://localhost:4000/`,
 				changeOrigin: true,
 				pathRewrite: {
-					'^/api': ''
+					'^/api': '/api'
 				}
 			}
 		}
