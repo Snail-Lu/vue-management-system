@@ -1,13 +1,7 @@
 <template>
 	<div class="login-container">
-		<el-form
-			ref="loginForm"
-			:model="loginForm"
-			:rules="loginRules"
-			class="login-form"
-			auto-complete="on"
-			label-position="left"
-		>
+		<el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
+			label-position="left">
 			<div class="title-container">
 				<h3 class="title">后台管理系统</h3>
 			</div>
@@ -16,53 +10,31 @@
 				<span class="svg-container">
 					<svg-icon icon-class="user" />
 				</span>
-				<el-input
-					id="account"
-					ref="username"
-					v-model="loginForm.username"
-					placeholder="Username"
-					name="username"
-					type="text"
-					tabindex="1"
-					auto-complete="on"
-				/>
+				<el-input id="account" ref="username" v-model="loginForm.username" placeholder="Username"
+					name="username" type="text" tabindex="1" auto-complete="on" />
 			</el-form-item>
 
 			<el-form-item prop="password">
 				<span class="svg-container">
 					<svg-icon icon-class="password" />
 				</span>
-				<el-input
-					id="psw"
-					:key="passwordType"
-					ref="password"
-					v-model="loginForm.password"
-					:type="passwordType"
-					placeholder="Password"
-					name="password"
-					tabindex="2"
-					auto-complete="on"
-					@keyup.enter.native="handleLogin"
-				/>
+				<el-input id="psw" :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
+					placeholder="Password" name="password" tabindex="2" auto-complete="on"
+					@keyup.enter.native="handleLogin" />
 				<span class="show-pwd" @click="showPwd">
 					<svg-icon :icon-class="passwordType == 'password' ? 'eye' : 'eye-open'" />
 				</span>
 			</el-form-item>
 
-			<el-button
-				id="login_btn"
-				:loading="loading"
-				type="primary"
-				style="width: 100%; margin-bottom: 30px"
-				@click.native.prevent="handleLogin"
-				>登录</el-button
-			>
+			<el-button id="login_btn" :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
+				@click.native.prevent="handleLogin">登录</el-button>
 		</el-form>
 	</div>
 </template>
 
 <script>
-import md5 from 'js-md5'
+import md5 from 'js-md5';
+import { login } from '@/api/login'
 export default {
 	name: 'Login',
 	data() {
@@ -96,13 +68,14 @@ export default {
 	},
 	watch: {
 		$route: {
-			handler: function(route) {
+			handler: function (route) {
 				this.redirect = route.query && route.query.redirect
 			},
 			immediate: true
 		}
 	},
 	methods: {
+		// 密码显隐切换
 		showPwd() {
 			if (this.passwordType === 'password') {
 				this.passwordType = ''
@@ -113,46 +86,21 @@ export default {
 				this.$refs.password.focus()
 			})
 		},
-		handleLogin() {
+
+		// 登录
+		async handleLogin() {
 			this.loading = true
-			//数据格式验证
-			this.$refs.loginForm.validate(valid => {
-				if (valid) {
-					localStorage.setItem('hasLogin', true)
-					var userInfo = {
-						id: '1',
-						psncode: '123',
-						username: 'admin'
-					}
-					localStorage.setItem('userInfo', JSON.stringify(userInfo))
-					this.$router.push({ path: '/home' })
-				} else {
-					console.log('验证失败')
-				}
-			})
-			return 0
-			// 可自定义登录时的逻辑处理
-			// this.req({
-			//   url: "login",
-			//   data: {
-			//     account: that.loginForm.username,
-			//     psw: md5(that.loginForm.password + "*/-sz") //对密码进行加盐md5处理
-			//   },
-			//   method: "POST"
-			// }).then(
-			//   res => {
-			//     console.log("res :", res);
-			//     localStorage.setItem("hasLogin", true);
-			//     localStorage.setItem("token", res.data.token);
-			//     localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
-			//     this.$router.push({ path: "/main" });
-			//   },
-			//   err => {
-			//     console.log("err :", err);
-			//     this.passwordError = true;
-			//     this.loading = false;
-			//   }
-			// );
+			try {
+				await this.$refs.loginForm.validate()
+				let { data: userInfo } = await login(this.loginForm)
+				localStorage.setItem('hasLogin', true)
+				localStorage.setItem('userInfo', JSON.stringify(userInfo))
+				this.loading = false
+				this.$router.push({ path: '/home' })
+			} catch (e) {
+				this.loading = false
+				console.log(e)
+			}
 		}
 	}
 }
