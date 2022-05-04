@@ -7,11 +7,10 @@
 				<i class="el-icon-full-screen" title="全屏" @click="handleFullScreen"></i>
 				<el-dropdown @command="logout">
 					<span class="el-dropdown-link" style="display:flex;align-items:center">
-						<el-avatar
-							src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-							style="margin-right:10px"
-						></el-avatar>
-						<span> {{ userInfo.username || 'admin' }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
+						<el-avatar src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+							style="margin-right:10px"></el-avatar>
+						<span> {{ userInfo.username || 'admin' }}<i class="el-icon-arrow-down el-icon--right"></i>
+						</span>
 					</span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item>退出登录</el-dropdown-item>
@@ -34,7 +33,7 @@
 <script>
 import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import { logout } from '@/api/system'
+// import { logout } from '@/api/system'
 
 export default {
 	data() {
@@ -142,10 +141,12 @@ export default {
 	position: relative;
 	height: 100%;
 	width: 100%;
+
 	&.mobile.openSidebar {
 		position: fixed;
 		top: 0;
 	}
+
 	.header {
 		height: 70px;
 		background: #242f42;
@@ -157,6 +158,7 @@ export default {
 		align-items: center;
 		position: relative;
 		z-index: 1003;
+
 		.title {
 			width: 192px;
 			font-family: MicrosoftYaHei;
@@ -173,42 +175,52 @@ export default {
 			margin-right: 18px;
 			cursor: pointer;
 		}
+
 		.option {
 			display: flex;
 			justify-content: space-between;
 			color: white;
+
 			.el-dropdown-link {
 				cursor: pointer;
 				color: #fff;
 			}
+
 			div {
 				display: flex;
 				align-items: center;
 			}
 		}
+
 		.iconfont {
 			font-size: 20px;
 			margin-right: 10px;
 		}
+
 		.icon-quit {
 			font-size: 16px;
 		}
+
 		.line {
 			margin: 0 23px 0 23px;
 		}
+
 		.logout {
 			cursor: pointer;
 		}
 	}
+
 	.main {
 		height: calc(100vh - 70px);
 		overflow: hidden;
 		position: relative;
+
 		.sidebar-container {
 			margin-top: 70px;
 		}
 	}
 }
+
 .drawer-bg {
 	background: #000;
 	opacity: 0.3;

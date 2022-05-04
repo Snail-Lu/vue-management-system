@@ -53,25 +53,25 @@ export const constantRoutes = [
 
 	// 表单表格
 	{
-		path: '/table',
+		path: '/admin',
 		component: Layout,
 		children: [
 			{
 				path: '',
-				name: 'table',
-				component: () => import('@/views/table/index'),
+				name: 'admin',
+				component: () => import('@/views/admin/index'),
 				meta: {
 					icon: 'el-icon-menu',
-					title: '表单表格'
+					title: '管理员列表'
 				}
 			},
 			{
 				path: 'add',
-				name: 'addForm',
-				component: () => import('@/views/table/add'),
+				name: 'addAdmin',
+				component: () => import('@/views/admin/add'),
 				meta: {
 					icon: 'el-icon-menu',
-					title: '新增表单'
+					title: '新增管理员'
 				},
 				hidden: true
 			}

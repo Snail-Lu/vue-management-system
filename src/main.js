@@ -19,13 +19,13 @@ import '@/permission' // permission control
 // set ElementUI lang to EN
 Vue.use(ElementUI, { znLcale })
 
-Vue.prototype.req = request
+Vue.prototype.request = request
 
 Vue.config.productionTip = false
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
+	el: '#app',
+	router,
+	store,
+	render: h => h(App)
 })

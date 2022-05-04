@@ -1,10 +1,6 @@
 <template>
   <div class="navbar">
-    <hamburger
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb class="breadcrumb-container" />
     <!-- <div class="right-menu">
@@ -18,7 +14,7 @@
 import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
 import Hamburger from "@/components/Hamburger";
-// import {logout} from "@/api/system";
+// import { logout } from "@//common/api/system";
 
 export default {
   data() {
@@ -62,14 +58,14 @@ export default {
     // console.log(document.cookie)
     var arr = document.cookie.split('; ')
     // console.log(arr)
-    arr.map(item=>{
-      console.log(typeof(item),item.indexOf('displayName')>-1)
-     if(item.indexOf('displayName')>-1) {
-       console.log(item.split('=')[1])
-       this.loginUser = item.split('=')[1]
-       return true
-     }
-   }) 
+    arr.map(item => {
+      console.log(typeof (item), item.indexOf('displayName') > -1)
+      if (item.indexOf('displayName') > -1) {
+        console.log(item.split('=')[1])
+        this.loginUser = item.split('=')[1]
+        return true
+      }
+    })
     // console.log(Cookies.get(),Cookies.get('euid'),'获取cookie')
     // if(Cookies.get('displayName​')) {
     //   this.loginUser = Cookies.get('displayName​')
@@ -90,6 +86,7 @@ export default {
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
   .hamburger-container {
     line-height: 46px;
     height: 100%;
