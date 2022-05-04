@@ -116,7 +116,7 @@ Vue.prototype.req = request
 1. 发起请求
 
 ```js
-this.req({
+this.request({
 	url: 'getInfo?id=6', // 此处写不同业务对应的url，框架会自动与baseURL拼接
 	data: {},
 	method: 'GET'
