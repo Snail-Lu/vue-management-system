@@ -34,7 +34,7 @@
 
 <script>
 import md5 from 'js-md5';
-import { login } from '@/api/login'
+import { login } from './api/login'
 export default {
 	name: 'Login',
 	data() {

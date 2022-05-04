@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 const urls = {
-	login: '/api/admin/login'
+	login: '/admin/login'
 }
 
 // 管理员登录
